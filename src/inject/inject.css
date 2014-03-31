@@ -1,0 +1,45 @@
+/**
+ * Place your custom CSS styles here.
+ **/
+
+#mySidebar {
+	color: #fff;
+	position:fixed;
+	top:0px;
+	right:0px;
+	width:300px;
+	height:100%;
+	background-image:-webkit-linear-gradient(#2F373D, #2F373D);
+	border-left:2px solid #ccc;
+	z-index:999999;
+	padding: 20px;
+	box-shadow: -6px 0px 5px -5px #999;
+}
+
+ #tp-tab {
+ 	width: 20px;
+ 	height: 50px;
+ 	background-image:url('chrome-extension://__MSG_@@extension_id__/image/tp-tab.png');
+ 	background-size: 100%;
+ 	position: absolute;
+ 	left: -20px;
+ }
+
+ #jp-li-img {
+ 	border-radius: 50%;
+ 	border: 1px solid #fff;
+ 	height: 40px;
+ }
+
+ #tp-content {
+ 	overflow: scroll;
+ }
+
+ #tp-action-bar {
+ 	display: none;
+ 	height: 50px;
+ 	width: 300px;
+ 	background-color: #fff;
+ 	position: fixed;
+ 	bottom: -50;
+ }
