@@ -27,19 +27,53 @@
 
  #jp-li-img {
  	border-radius: 50%;
- 	border: 1px solid #fff;
- 	height: 40px;
+ 	border: 2px solid #fff;
+ 	height: 50px;
+ 	float: left;
+ 	box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 1);
  }
 
  #tp-content {
  	overflow: scroll;
+ 	padding-top: 30px;
  }
 
  #tp-action-bar {
- 	display: none;
- 	height: 50px;
+ 	color: #fff;
+ 	height: 30px;
  	width: 300px;
- 	background-color: #fff;
+ 	background-color: #f27b22;
  	position: fixed;
- 	bottom: -50;
+ 	bottom: 10;
+ 	text-align: center;
+ 	cursor: pointer;
+ 	padding-top: 15px;
+ 	font-size: 26px;
+ 	border: 1px solid #ccc;
+ 	border-radius: 4px;
+ 	margin-top: 30px;
  }
+
+#tp-bookmarked {
+	height: 30px;
+	width: 30px;
+	background-image:url('chrome-extension://__MSG_@@extension_id__/image/tp-bookmarked.png');
+	float:right;
+	display: none;
+} 
+
+.clearfix {
+	clear:	both;
+}
+
+#tp-content p {
+	font-size: 18px;
+}
+
+#tp-flame {
+	vertical-align: middle;
+	height: 18px;
+	width: 18px;
+	background-image:url('chrome-extension://__MSG_@@extension_id__/image/tp-flame.png');
+	display: inline;
+}

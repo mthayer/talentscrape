@@ -23,6 +23,7 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
+    "http://localhost*"
     "clipboardRead",
     "notifications",
     "background",
@@ -46,6 +47,7 @@
       ],
       "js": [
         "js/jquery/jquery.js",
+        "js/apigee/apigee.min.js",
         "src/inject/inject.js"
       ]
     }
