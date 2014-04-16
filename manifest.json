@@ -23,7 +23,6 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
-    "http://localhost*"
     "clipboardRead",
     "notifications",
     "background",
@@ -38,7 +37,10 @@
         "https://www.linkedin.com/profile/*"
       ],
       "css": [
-        "src/inject/inject.css"
+        "src/inject/inject.css",
+        "src/inject/bootstrap.min.css",
+        "css/bootstrap.min.css",
+        "css/bootstrap-theme.min.css"
       ]
     },
     {
@@ -48,6 +50,7 @@
       "js": [
         "js/jquery/jquery.js",
         "js/apigee/apigee.min.js",
+        "js/bootstrap/bootstrap.min.js",
         "src/inject/inject.js"
       ]
     }
