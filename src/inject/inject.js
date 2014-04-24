@@ -42,7 +42,7 @@ $(document).ready(function(){
                     //show data for this person now
                     sidebar.innerHTML = "<div id='tp-tab'></div><span id='tp-loggedin-bar'><span id='tp-logout'>Logout</span> | "+ appUser._data.username+"</span>\
                     <div id='header'>\
-					<div id='tp-images'></div>\
+                    <div id='tp-images'></div>\
 					<div id='tp-bookmarked'></div>\
 					</div>\
 					<div class='clearfix'></div>\
