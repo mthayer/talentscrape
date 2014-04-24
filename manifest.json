@@ -38,7 +38,6 @@
       ],
       "css": [
         "src/inject/inject.css",
-        "src/inject/bootstrap.min.css",
         "css/bootstrap.min.css",
         "css/bootstrap-theme.min.css"
       ]

@@ -2,18 +2,22 @@
  * Place your custom CSS styles here.
  **/
 
+
 #mySidebar {
 	color: #fff;
 	position:fixed;
 	top:0px;
 	right:0px;
-	width:300px;
+	width:270px;
 	height:100%;
 	background-image:-webkit-linear-gradient(#2F373D, #2F373D);
 	border-left:2px solid #ccc;
 	z-index:999999;
 	padding: 20px;
-	box-shadow: -6px 0px 5px -5px #999;
+}
+
+#mySidebar a {
+	color: #bde6f9;
 }
 
  #tp-tab {
@@ -23,6 +27,7 @@
  	background-size: 100%;
  	position: absolute;
  	left: -20px;
+ 	top: 80px;
  }
 
  #jp-li-img {
@@ -76,4 +81,30 @@
 	width: 18px;
 	background-image:url('chrome-extension://__MSG_@@extension_id__/image/tp-flame.png');
 	display: inline;
+}
+
+#head-band {
+	height: 50px;
+	/*background: #333;*/
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#head-logo {
+	background-image:url('chrome-extension://__MSG_@@extension_id__/image/icon128.png');
+	height: 50px;
+	width: 50px;
+	background-size:50px 50px;
+	background-repeat:no-repeat;
+	margin: auto;
+}
+
+#tp-loggedin-bar {
+	float: right;
+	font-size: 14px;
+}
+
+#tp-logout {
+	text-decoration: underline;
+	cursor: pointer;
 }

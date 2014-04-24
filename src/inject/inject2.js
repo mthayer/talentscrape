@@ -36,10 +36,11 @@ $(document).ready(function(){
         });
 
         // $('#form-add-user').on('click', '#btn-submit', createUser);
-        // $('#login-submit').on('click', login());
-        $('#login-submit').on('click', function(){
-        	console.log("click");
-        })
+        $('#mySidebar').on('click', '#login-submit', function(e){
+        	console.log('fitst');
+        	login();
+        	e.preventDefault();
+        });
 
         // $('#header-mylist').on('click', '#btn-logout', function() {
         //     client.logout();
@@ -69,7 +70,7 @@ $(document).ready(function(){
         //         }
         //     });
         // }
-        //login();
+
         function login(username, password) {
             $('#login-section-error').html('');
             console.log("trying to login...");
@@ -112,49 +113,49 @@ $(document).ready(function(){
 
         //loadItems();
 
-        // function loadItems() {
-        //     items.fetch(
-        //         function(err, data) { // Success
-        //             if (err) {
-        //                 alert("Read failed - loading offline data");
-        //                 items = client.restoreCollection(localStorage.getItem('items'));
-        //                 items.resetEntityPointer();
-        //                 $('#bucketlist').empty();
-        //                 while (items.hasNextEntity()) {
-        //                     var item = items.getNextEntity();
-        //                     $('#bucketlist').append('<li><a href="#page-add"><h3>' + item.get('title') + '</h3></a></li>')
-        //                 }
-        //                 $('#bucketlist').listview('refresh');
-        //             } else {
-        //                 $('#bucketlist').empty();
-        //                 while (items.hasNextEntity()) {
-        //                     var item = items.getNextEntity();
-        //                     $('#bucketlist').append('<li><a href="#page-add"><h3>' + item.get('title') + '</h3></a></li>')
-        //                 }
-        //                 $('#bucketlist').listview('refresh');
-        //                 localStorage.setItem('items', items.serialize());
-        //             }
-        //         });
-        // }
+        function loadItems() {
+            items.fetch(
+                function(err, data) { // Success
+                    if (err) {
+                        alert("Read failed - loading offline data");
+                        items = client.restoreCollection(localStorage.getItem('items'));
+                        items.resetEntityPointer();
+                        $('#bucketlist').empty();
+                        while (items.hasNextEntity()) {
+                            var item = items.getNextEntity();
+                            $('#bucketlist').append('<li><a href="#page-add"><h3>' + item.get('title') + '</h3></a></li>')
+                        }
+                        $('#bucketlist').listview('refresh');
+                    } else {
+                        $('#bucketlist').empty();
+                        while (items.hasNextEntity()) {
+                            var item = items.getNextEntity();
+                            $('#bucketlist').append('<li><a href="#page-add"><h3>' + item.get('title') + '</h3></a></li>')
+                        }
+                        $('#bucketlist').listview('refresh');
+                        localStorage.setItem('items', items.serialize());
+                    }
+                });
+        }
 
-        // $('#form-add-item').on('click', '#btn-submit', function() {
-        //     if ($('#form-title').val() !== '') {
-        //         var newItem = {
-        //             'title': $('#form-title').val(),
-        //             'desc': $('#form-desc').val()
-        //         }
-        //         items.addEntity(newItem, function(error, response) {
-        //             if (error) {
-        //                 alert("write failed");
-        //             } else {
-        //                 $('#form-title').val('');
-        //                 $('#form-desc').val('');
-        //                 loadItems();
-        //                 history.back();
-        //             }
-        //         });
-        //     }
-        // });
+        $('#form-add-item').on('click', '#btn-submit', function() {
+            if ($('#form-title').val() !== '') {
+                var newItem = {
+                    'title': $('#form-title').val(),
+                    'desc': $('#form-desc').val()
+                }
+                items.addEntity(newItem, function(error, response) {
+                    if (error) {
+                        alert("write failed");
+                    } else {
+                        $('#form-title').val('');
+                        $('#form-desc').val('');
+                        loadItems();
+                        history.back();
+                    }
+                });
+            }
+        });
    
     
 	// 
@@ -168,17 +169,17 @@ $(document).ready(function(){
         appName:'talent-pool'
     }
 	//Initializes the SDK. Also instantiates Apigee.MonitoringClient
-	// var dataClient = new Apigee.Client(client_creds);
+	var dataClient = new Apigee.Client(client_creds);
 
- //    dataClient.login('mthayer', 'Padres26', function (error,response) {
- //        if (error) {
- //            console.log(error);
- //        } else {
- //            var token = dataClient.token;
- //            console.log(token);
- //        }
- //    }
-// );
+    dataClient.login('mthayer', 'Padres26', function (error,response) {
+        if (error) {
+            console.log(error);
+        } else {
+            var token = dataClient.token;
+            console.log(token);
+        }
+    }
+);
 
     // get the LIID
     // make a request to check if it exists
@@ -201,9 +202,17 @@ $(document).ready(function(){
 			var sidebar = document.createElement('div');
 			sidebar.id = "mySidebar";
 			sidebar.innerHTML = "\
+				<div id='tp-tab'></div>\
+				<div id='header'>\
+				<div id='tp-images'></div>\
+				<div id='tp-bookmarked'></div>\
+				</div>\
+				<div class='clearfix'></div>\
+				<div id='tp-content'></div>\
+				<div id='tp-action-bar'>Bookmark</div>\
 				<form action='' id='form-login-user'>\
-				<input id='form-username' type='text' placeholder='Your username...' value='test'/>\
-				<input id='form-password' placeholder='Your password' value='Padres26'/>\
+				<input id='form-username' type='text' placeholder='Your username...' />\
+				<input id='form-password' placeholder='Your password'/>\
 				</form>\
 				<button id='login-submit'>Login</button>\
 				<div id='login-section-error'></div>\
@@ -222,7 +231,6 @@ $(document).ready(function(){
 
 	sidebarOpen = true;
 
-	var tpPanel = $('#tp-content');
 
 	// candidate.URL = window.location;
 	candidate.LIID = window.location.search.match(/id=(\d+)/);
@@ -256,17 +264,17 @@ $(document).ready(function(){
 	};
 
 	//Call request to initiate the API call
-	// dataClient.request(options, function (error, response) {
-	// 	if (error){
-	// 		console.log("initial request failed");
-	// 	} else {
-	// 		console.log(response);
-	// 		if(response.count){
-	// 			$('#tp-candidateed').show()
-	// 			$('#tp-action-bar').hide();
-	// 		}
-	// 	}	
-	// });
+	dataClient.request(options, function (error, response) {
+		if (error){
+			console.log("initial request failed");
+		} else {
+			console.log(response);
+			if(response.count){
+				$('#tp-candidateed').show()
+				$('#tp-action-bar').hide();
+			}
+		}	
+	});
 
 	candidateSend = {
 		"name" : candidate.LIID[1],
@@ -282,18 +290,6 @@ $(document).ready(function(){
 	
 	if(candidate.LItwi){
 		candidateSend.twitterName = candidate.twitterName[2];
-		
-		// var xhr = new XMLHttpRequest();
-		// xhr.open("GET", "http://localhost:3000/api/ext/ifenn", true);
-		// xhr.onreadystatechange = function() {
-		//   if (xhr.readyState == 4) {
-		//     // JSON.parse does not evaluate the attacker's scripts.
-		//     var resp = JSON.parse(xhr.responseText);
-		//     console.log(resp);
-		//     console.log(xhr.responseText);
-		//   }
-		// }
-		// xhr.send();
 	}
 
 	$('#tp-images').html('<img id="jp-li-img" src="'+candidate.LIpic+'" />');
@@ -362,4 +358,72 @@ $(document).ready(function(){
 	})
 	
 })
+
+// candidates.addEntity(candidateSend, function(error, response){
+		// 	if(error){
+		// 		console.log("addEntity error");
+		// 	}
+		// 	console.log("touchdown");
+		// 	appUser.connect("viewed", response, function(error, data) {
+		// 				if(error){
+		// 					console.log("we didnt mark as viewed");
+		// 				}
+		// 				console.log("viewed");
+		// 				var myList = new Apigee.Collection({
+		// 		            "client": client,
+		// 		            "type": "users/me/viewed",
+		// 		            "qs": {
+		// 		                "limit": 25,
+		// 		                "ql": "order by fullName"
+		// 		            }
+		// 		        });
+		// 		         // myList.fetch(
+  //            //    			function(err, data) {console.log(data)})
+		// 			})
+		// })	
+	
+		// // function ViewedProfile() {
+	// 	appUser.connect("viewed", candidate, function(error, data) {
+	// 		if(error){
+	// 			console.log("we didnt mark as viewed");
+	// 		}
+	// 	})
+	// }
+	// 
+	// // var options = {
+		// 	method:'POST',
+		// 	endpoint:'candidates', //The collection name
+		// 	body:[candidateSend]
+		// };
+
+		// client.request(options, function (error, response) {
+		// 		if (error) { 
+		// 		    console.log(error);
+		// 		} else { 
+		// 			console.log("here is comes:")
+		// 			console.log(response);
+		// 			appUser.connect("viewed", response, function(error, data) {
+		// 				if(error){
+		// 					console.log("we didnt mark as viewed");
+		// 				}
+		// 				console.log("viewed");
+		// 			})
+		// 		}
+
+		// 	});
+		// 	
+		// 	// 	client.request(options, function (error, response) {
+	// 	if (error){
+	// 		console.log("initial request failed");
+	// 	} else {
+	// 		if(response.count){
+	// 			// console.log(response);
+	// 			//this already exists in the db so we can so we should get and show all details
+	// 		} else {
+	// 			console.log("this person not found");
+	// 			//send the scraped data to node
+	// 			SendProfile();
+	// 		}
+	// 	}	
+	// });
 	
